@@ -23,7 +23,6 @@ ALLOWED_HOSTS = ['*']
 
 LOCAL_APPS = [  # only apps with urls.py
     'users',
-    'exchange_rates',
 ]
 
 INSTALLED_APPS = [
@@ -39,7 +38,7 @@ INSTALLED_APPS = [
                      'drf_yasg',
                      'corsheaders',
                      'rest_framework',
-                     'django_crontab',
+                     'django_filters',
 
                      # custom apps without urls.py #########
                      # ...
@@ -98,7 +97,7 @@ SQLITE_DB_CONF = {
 }
 
 DATABASES = {
-    'default': SQLITE_DB_CONF,
+    'default': POSTGRES_DB_CONF,
 }  # Тут по желанию postgres или sqlite
 
 # Password validation
@@ -230,8 +229,3 @@ SWAGGER_SETTINGS = {
     },
     'DOC_EXPANSION': 'none',  # “none”, “list”, or “full”
 }
-
-CRONJOBS = [
-    ('00 12 * * *', 'exchange_rates.tasks.add_today_rates', '>> ' + str(BASE_DIR / 'error_processing.log')),  # Текущий день
-    ('05 12 * * *', 'exchange_rates.tasks.add_daily_rates', '>> ' + str(BASE_DIR / 'error_processing.log')),  # Проверка последных 30 дней
-]

@@ -9,6 +9,5 @@ from djangoProject.settings import LOCAL_APPS
 #                for x in LOCAL_APPS]
 
 urlpatterns = [
-    path('', include('exchange_rates.urls'), ),
-    path('user/', include('users.urls', )),
+    path('users/', include('users.urls', )),
 ]
